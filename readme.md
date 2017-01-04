@@ -1,1 +1,1 @@
-React Boilerplate
+A timer application created using React
