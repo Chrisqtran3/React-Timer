@@ -1,15 +1,21 @@
-const React = require('react');
-let Clock = require('Clock');
-let Controls = require('Controls');
+import React, { Component } from 'react';
+import Clock from 'Clock';
+import Controls from 'Controls';
 
-let Timer = React.createClass({
-	getInitialState: function() {
-		return {
+class Timer extends Component {
+	constructor() {
+		super()
+
+		this.state = {
 			count: 0,
 			timerStatus: 'stopped'
 		}
-	},
-	componentDidUpdate: function(prevProps, prevState) {
+
+		this.handleStart = this.handleStart.bind(this);
+		this.handleStatusChange = this.handleStatusChange.bind(this);
+	}
+
+	componentDidUpdate(prevProps, prevState) {
 		if(this.state.timerStatus !== prevState.timerStatus) {
 			switch(this.state.timerStatus) {
 				case 'started':
@@ -25,23 +31,27 @@ let Timer = React.createClass({
 					break;
 			}
 		}
-	},
-	componentWillUnmount: function() {
+	}
+
+	componentWillUnmount() {
 		clearInterval(this.timer);
-	},
-	handleStart: function() {
+	}
+
+	handleStart() {
 		this.timer = setInterval(() => {
 			this.setState({
 				count: this.state.count + 1
 			});
 		}, 1000);
-	},
-	handleStatusChange: function(newTimerStatus) {
+	}
+
+	handleStatusChange(newTimerStatus) {
 		this.setState({
 			timerStatus: newTimerStatus
 		});
-	}, 
-	render: function() {
+	}
+
+	render() {
 		let {count, timerStatus} = this.state;
 
 		return(
@@ -52,9 +62,6 @@ let Timer = React.createClass({
 			</div>
 		);
 	}
-});
+}
 
-module.exports = Timer;
-
-// Initial State: 0 and stopped
-// Wire components: Clock and Controls
+export default Timer;

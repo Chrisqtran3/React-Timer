@@ -1,13 +1,7 @@
-const React = require('react');
+import React, { Component, PropTypes } from 'react';
 
-let Clock = React.createClass({
-	getDefaultProps: function() {
-		totalSeconds: 0
-	},
-	propTypes: {
-		totalSeconds: React.PropTypes.number
-	},
-	formatSeconds: function(totalSeconds) {
+class Clock extends Component {
+	formatSeconds(totalSeconds) {
 		let seconds = totalSeconds % 60;
 		let minutes = Math.floor(totalSeconds / 60);
 
@@ -20,8 +14,9 @@ let Clock = React.createClass({
 		}
 
 		return minutes + ':' + seconds;
-	},
-	render: function() {
+	}
+
+	render() {
 		let {totalSeconds} = this.props;
 
 		return(
@@ -32,6 +27,14 @@ let Clock = React.createClass({
 			</div>
 		);
 	}
-});
+}
 
-module.exports = Clock;
+Clock.defaultProps = {
+	totalSeconds: 0
+}
+
+Clock.propTypes = {
+	totalSeconds: PropTypes.number
+}
+
+export default Clock;

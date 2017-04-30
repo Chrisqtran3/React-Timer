@@ -1,9 +1,9 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
-const { Route, Router, IndexRoute, hashHistory } = require('react-router'); 
-let Main = require('Main');
-let Timer = require('Timer');
-let Countdown = require('Countdown');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Route, Router, IndexRoute, hashHistory } from 'react-router';
+import Main from 'Main';
+import Timer from 'Timer';
+import Countdown from 'Countdown';
 
 // Load foundation
 $(document).foundation();

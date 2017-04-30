@@ -1,7 +1,7 @@
-const React = require('react');
+import React, { Component } from 'react';
 
-let CountdownForm = React.createClass({
-	onSubmit: function(e) {
+class CountdownForm extends Component {
+	onSubmit(e) {
 		e.preventDefault();
 
 		let strSeconds = this.refs.seconds.value;
@@ -10,17 +10,18 @@ let CountdownForm = React.createClass({
 			this.refs.seconds.value = '';
 			this.props.onSetCountdown(parseInt(strSeconds, 10));
 		}
-	},
-	render: function() {
+	}
+
+	render() {
 		return(
 			<div>
-				<form ref="form" onSubmit={this.onSubmit} className="countdown-form">
+				<form ref="form" onSubmit={this.onSubmit.bind(this)} className="countdown-form">
 					<input type="text" ref="seconds" placeholder="Enter time in seconds"/>
 					<button className="button expanded">Start</button>
 				</form>
 			</div>
 		);
 	}
-});
+}
 
-module.exports = CountdownForm;
+export default CountdownForm;

@@ -1,19 +1,26 @@
-const React = require('react');
-let Clock = require('Clock');
-let CountdownForm = require('CountdownForm');
-let Controls = require('Controls');
+import React, { Component } from 'react';
+import Clock from 'Clock';
+import CountdownForm from 'CountdownForm'
+import Controls from 'Controls';
 
-let Countdown = React.createClass({ 
-	getInitialState: function() {
-		return {
+class Countdown extends Component {
+	constructor() {
+		super();
+
+		this.state = {
 			count: 0,
 			countdownStatus: 'stopped'
-		};
-	},
-	componentDidUpdate: function(prevProps, prevState) {
+		}
+
+		this.startTimer = this.startTimer.bind(this);
+		this.handleSetCountdown = this.handleSetCountdown.bind(this);
+		this.handleStatusChange = this.handleStatusChange.bind(this);
+	}
+
+	componentDidUpdate(prevProps, prevState) {
 		if(this.state.countdownStatus !== prevState.countdownStatus) {
 			switch(this.state.countdownStatus) {
-				case 'started': 
+				case 'started':
 					this.startTimer();
 					break;
 				case 'stopped':
@@ -26,12 +33,14 @@ let Countdown = React.createClass({
 					break;
 			}
 		}
-	},
-	componentWillUnmount: function() {
+	}
+
+	componentWillUnmount() {
 		clearInterval(this.timer);
 		this.timer = undefined;
-	},
-	startTimer: function() {
+	}
+
+	startTimer() {
 		this.timer = setInterval(() => {
 			let newCount = this.state.count - 1;
 
@@ -46,19 +55,22 @@ let Countdown = React.createClass({
 			}
 
 		}, 1000);
-	},
-	handleSetCountdown: function(seconds) {
+	}
+
+	handleSetCountdown(seconds) {
 		this.setState({
 			count: seconds,
 			countdownStatus: 'started'
 		});
-	},
-	handleStatusChange: function(newStatus) {
+	}
+
+	handleStatusChange(newStatus) {
 		this.setState({
 			countdownStatus: newStatus
 		});
-	},
-	render: function() {
+	}
+
+	render() {
 		let {count, countdownStatus} = this.state;
 		let renderControlArea = () => {
 			if(countdownStatus !== 'stopped') {
@@ -76,6 +88,6 @@ let Countdown = React.createClass({
 			</div>
 		);
 	}
-});
+}
 
-module.exports = Countdown;
+export default Countdown;

@@ -1,7 +1,7 @@
-const React = require('react');
-const {Link, IndexLink} = require('react-router');
+import React from 'react';
+import { Link, IndexLink } from 'react-router'
 
-let Nav = () => {
+const Nav = () => {
 	return(
 		<div className="top-bar">
 			<div className="top-bar-left">
@@ -28,4 +28,4 @@ let Nav = () => {
 	);
 };
 
-module.exports = Nav;
+export default Nav;
